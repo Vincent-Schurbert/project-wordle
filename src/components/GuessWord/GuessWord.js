@@ -1,10 +1,13 @@
 import React from "react";
 
-function GuessWord({ guessedWord, setGuessedWord }) {
+function GuessWord({ addGuessToList }) {
+  const [guessedWord, setGuessedWord] = React.useState("");
+
   function handleGuessWordSubmit(event) {
     event.preventDefault();
 
-    console.log(guessedWord);
+    addGuessToList(guessedWord);
+
     setGuessedWord("");
   }
 
