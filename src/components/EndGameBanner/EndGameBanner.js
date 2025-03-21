@@ -1,19 +1,12 @@
 import React from "react";
+import { WonBanner } from "./WonBanner";
+import { LostBanner } from "./LostBanner";
 
 function EndGameBanner({ numberOfGuesses, isWon, answer }) {
   return isWon ? (
-    <div className="happy banner">
-      <p>
-        <strong>Congratulations!</strong> Got it in
-        <strong>{numberOfGuesses} guesses</strong>.
-      </p>
-    </div>
+    <WonBanner numberOfGuesses={numberOfGuesses} />
   ) : (
-    <div className="sad banner">
-      <p>
-        Sorry, the correct answer is <strong>{answer}</strong>.
-      </p>
-    </div>
+    <LostBanner answer={answer} />
   );
 }
 
