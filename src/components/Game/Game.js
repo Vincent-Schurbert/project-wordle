@@ -6,16 +6,15 @@ import GuessList from "../GuessList/GuessList";
 import { checkGuess } from "../../game-helpers";
 import EndGameBanner from "../EndGameBanner/EndGameBanner";
 import { NUM_OF_GUESSES_ALLOWED } from "../../constants";
-
-// Pick a random word on every pageload.
-const answer = sample(WORDS);
-// To make debugging easier, we'll log the solution in the console.
-console.info({ answer });
+import RestartButton from "../RestartButton/RestartButton";
 
 function Game() {
   const [guessList, setGuessList] = React.useState([]);
   const [gameFinished, setGameFinished] = React.useState(false);
   const [isWon, setIsWon] = React.useState(false);
+  const [answer, setAnswer] = React.useState(() => sample(WORDS));
+
+  console.log(answer);
 
   function addGuessToList(guessedWord) {
     const newGuess = checkGuess(guessedWord, answer);
@@ -38,8 +37,20 @@ function Game() {
     setGuessList(newGuessList);
   }
 
+  function handleRestart() {
+    setGuessList([]);
+    setGameFinished(false);
+    setIsWon(false);
+
+    const newAnswer = sample(WORDS);
+    setAnswer(newAnswer);
+
+    console.log(newAnswer);
+  }
+
   return (
     <>
+      {gameFinished && <RestartButton handleRestartGame={handleRestart} />}
       <GuessList guessedWordList={guessList} />
       <GuessWord addGuessToList={addGuessToList} />
       {gameFinished && (
