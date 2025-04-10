@@ -7,6 +7,7 @@ import { checkGuess } from "../../game-helpers";
 import EndGameBanner from "../EndGameBanner/EndGameBanner";
 import { NUM_OF_GUESSES_ALLOWED } from "../../constants";
 import RestartButton from "../RestartButton/RestartButton";
+import Keyboard from "../Keyboard/Keyboard";
 
 function Game() {
   const [guessList, setGuessList] = React.useState([]);
@@ -53,6 +54,7 @@ function Game() {
       {gameFinished && <RestartButton handleRestartGame={handleRestart} />}
       <GuessList guessedWordList={guessList} />
       <GuessWord addGuessToList={addGuessToList} />
+      <Keyboard wordlist={guessList} />
       {gameFinished && (
         <EndGameBanner
           numberOfGuesses={guessList.length}
